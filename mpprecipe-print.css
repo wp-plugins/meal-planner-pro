@@ -1,0 +1,88 @@
+/* ZLRecipe-Print.css
+A print format stylesheet for the MealPlannerPro Recipe Plugin
+Plugin URI: http://www.mealplannerpro.com/
+Plugin GitHub: https://github.com/Ziplist/recipe_plugin
+Plugin Description: A plugin that adds all the necessary microdata to your recipes, so they will show up in Google's Recipe Search
+Author: MealPlannerPro.com
+Author URI: http://www.mealplannerpro.com/
+License: GPLv3 or later, unless specified
+
+Copyright 2011, 2012, 2013, 2014 MealPlannerPro, Inc.
+*/
+
+/* PRINT TYPOGRAPHY */
+#mpprecipe-print-container .fl-l { float: left; }
+#mpprecipe-print-container .width-50 { width: 50%; }
+#mpprecipe-print-container .clear, #mpprecipe-print-container .zlclear { clear: both; }
+#mpprecipe-print-container p { clear: both; }
+#mpprecipe-print-container .h-4 {
+  font-size: 20px;
+  margin: 10px 0;
+}
+#mpprecipe-print-container .bold, #mpprecipe-print-container .strong { font-weight: bold; }
+#mpprecipe-print-container .italic, #mpprecipe-print-container .em { font-style: italic; }
+#mpprecipe-print-container .t-a-c { text-align: center; }
+
+/* SPECIFIC PRINT ELEMENT STYLES */
+#mpprecipe-container .hide-print { display: none; } /* used to hide things in the recipe print view */
+
+#mpprecipe-print-container {
+  font-family: 'helvetica neue', helvetica, arial, verdana, sans-serif;
+  margin: 0px;
+}
+
+#mpprecipe-innerdiv {
+  padding: 10px;
+  width: 7.5in;
+  margin: 0 auto;
+  border: 1px dashed black;
+}
+#mpprecipe-print-container #mpprecipe-title {
+  font-weight: bold;
+  font-size: 36px;
+}
+
+#mpprecipe-print-container .b-b { margin-bottom: 10px; }
+
+#mpprecipe-print-container .mpprecipe-print-link,
+#mpprecipe-print-container .mpp-recipe-link,
+#mpprecipe-print-container img.ingredient-image,
+#mpprecipe-print-container img.instruction-image,
+#mpprecipe-print-container #mpprecipe-rating,
+#mpprecipe-print-container .mpp-linkback
+{ display:none; }
+
+#mpprecipe-print-container .meta p, #mpprecipe-print-container .zlmeta p {
+  margin: 0px;
+  font-size: 12px;
+}
+
+#mpprecipe-print-container .img-desc-wrap #mpprecipe-summary {
+  font-style: italic;
+  font-size: 14px;
+}
+
+#mpprecipe-print-container #mpprecipe-summary .summary { margin: 10px 0; }
+
+#mpprecipe-print-container #mpprecipe-ingredients-list .ingredient-label,
+#mpprecipe-print-container #mpprecipe-instructions-list .instruction-label {
+    font-weight: bold;
+    left: -22px;
+    list-style-type: none;
+    margin-top: 5px;
+    position: relative;
+}
+
+#mpprecipe-print-container #mpp-printed-permalink {
+	font-size: 0.7em;
+	color: #777777;
+	margin-top: 2em;
+}
+
+#mpprecipe-print-container #mpp-printed-copyright-statement {
+	font-size: 0.9em;
+	text-align: center;
+	margin-top: 1em;
+}
+
+/* END PRINT FORMATTING */

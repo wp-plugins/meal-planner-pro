@@ -1,0 +1,93 @@
+=== MealPlannerPro Recipe Plugin ===
+Contributors: MealPlannerPro Inc., codeswan
+Plugin Name: MealPlannerPro Recipe Plugin
+Plugin URI: http://mealplannerpro.com/wordpress-recipe-plugin
+Plugin GitHub: https://github.com/Ziplist/recipe_plugin
+License: GPLv3 or later
+Author URI: http://www.mealplannerpro.com/
+Author: MealPlannerPro, Inc.
+Donate link: http://sushiday.com/recipe-seo-plugin/
+Tags: google rich snippets, hrecipe, print recipe, recipe, recipe card, recipe seo, schema.org, seo
+Requires at least: 3.1
+Tested up to: 4.2
+Stable tag: trunk
+
+Formats recipes so they are SEO-friendly.
+
+== Description ==
+
+Meal Planner Pro brings your recipes right to your readers’ tables!
+
+Make your recipes SEO-friendly and more likely to appear in [Google's Recipe View](http://googleblog.blogspot.com/2011/02/slice-and-dice-your-recipe-search.html) search. No need to hand-code your recipes into a sophisticated recipe structure when the Meal Planner Pro Recipe Plugin will do all the heavy lifting for you, enhancing the findability of your recipe website.
+
+If you’re familiar with the open-source [RecipeSEO](http://recipeseo.com/) plugin built by Allison Day, you’ll quickly note that the Meal Planner Pro Recipe Plugin is an extension of this plugin.
+
+Among the new features added by Meal Planner Pro are:
+
+**Works with WordPress > 4.2.2:** Updated for full compatibility with WordPress > 4.2.2.
+
+**Schema/Recipe Support:** Automatically integrate Schema.org's Recipe mark-up into your recipe posts to make them more findable by search engines. 
+
+**Recipe Image Support:** Add images within the plugin to appear with your recipe or in your Google Rich Snippet.
+
+**Copy/Paste Ingredients:** Simply cut a block of ingredients and paste them into one field. No need to add each ingredient one by one into separate fields.
+
+**Auto-Populate Recipe Name:** The recipe name is automatically replicated inside the plugin, taking the name from the post name, which further enhances SEO.
+
+**Add Links to Ingredients or Instructions:** Attach affiliate links or links to related recipes from the Ingredients, Instructions or Summary fields with ease. No other plugin enables you to do this.
+
+**Bold and Asterisk Styling:** Add bold or italicized styling to words or phrases within the Ingredients, Instructions, Summary and Notes sections. 
+
+**Modified Image Display:** Add a recipe image to the plugin so that it displays in a user’s recipe box, but then choose to hide it from view on your recipe post and/or print view.
+
+**Incorporate Images into Instructions:** Now you can easily add step-by-step images to your instructions (or ingredients) from within the plugin.
+
+**Notes Field:** Add notes to your recipes, such as optional ingredients, required kitchen tools and equipment and/or additional instructions (e.g., freezing, microwave, etc.)
+
+**Save Recipe Button:** Let your users save your recipe to their Meal Planner Pro recipe box with the click of a button.
+
+**Enhanced Printing Capabilities:** Add a copyright statement or URL to appear at the bottom of your printed recipes. Also, display a permalink at the bottom of printed recipes so users can easily find individual recipes on your website.
+
+**Multiple Paragraph Support in Summary Section:** Users can now add multiple paragraphs to the Summary field within the plugin.
+
+== Installation ==
+
+You can download and install the Meal Planner Pro Recipe Plugin using the built-in WordPress plugin installer. If you download the Meal Planner Pro Recipe Plugin manually, make sure it is uploaded to "/wp-content/plugins/mealplannerpro-recipe-plugin/".
+
+Activate the Meal Planner Pro Recipe Plugin in the "Plugins" admin panel using the "Activate" link.
+
+To use the plugin, click the little Meal Planner Pro Recipe icon on the "Edit Post" pages, right next to the other editor toolbar buttons at the top of the text editor box. Then enter the details about your recipe into the appropriate boxes, and then click the "Add Recipe" button. This will save your recipe, and insert it into your blog post.
+
+
+
+== Frequently Asked Questions ==
+
+= What will happen to the ZipList Save Recipe button that was on my recipes? =
+
+If you were using the ZipList plugin before, we will now support the "Save Recipe" button and universal recipe box. All the same great features that ZipList offered but even better.
+
+= How do I edit a recipe with the Meal Planner Pro Recipe Plugin? =
+
+Starting with version 2.4, you'll want to click the Meal Planner Pro icon on the visual editor toolbar to both create and edit a recipe. You no longer need to click on the image placeholder within the blog post to edit a recipe.
+
+= Can I use the plugin to add multiple recipes to one post or page? =
+
+There should only be one recipe per post or page. The plugin does allow for compound recipes which is one way to include multiple lists of ingredients in your post (e.g., for a salad and a salad dressing). Simply enter your instructions for the main recipe, then start the next line with an exclamation point to create a label, like "!For the Salad Dressing". Then, add the instructions for the secondary recipe. Starting with version 2.4, we no longer support multiple Meal Planner Pro-formatted recipes within a single post.
+
+= When I use Meal Planner Pro's plugin, where are the recipes stored? =
+
+With the Meal Planner Pro Recipe Plugin, your recipes are stored safely in a separate DB table in your main WP database. The recipe table is named wp_mpprecipe_recipes and you can take a look at it yourself using any WordPress database tools at your disposal.
+
+= Why do you put a placeholder image into my Edit Post page, instead of my actual recipe? =
+
+Because of the way the WordPress text editor works, if you decide to add or remove something from your recipe using the text editor, it can very easily mess up the markup of the code - so the Meal Planner Pro plugin prevents that from happening by not allowing you to edit the recipe in the text editor.
+
+== Screenshots ==
+
+1. The Meal Planner Pro Recipe Plugin icon appears on the visual editor toolbar.
+2. It's easy to enter the basic information for your recipes: the title, the ingredients and the instructions for preparing the recipe.
+3. There is no limit to the number of ingredients you can add.
+4. And if you want to add even more information about your recipe, such as your rating of the recipe, or the serving size, all you have to do is click the "More Options" link, and you can!
+5. You can fill out as many or as few additional options as you would like.
+6. Once you click the "Add Recipe" button, a placeholder image will be inserted into your post where your recipe will go. If you need to edit your recipe, simply click on the spoon and fork icon in the visual editor toolbar (you do not need to click on the recipe placeholder as you did in previous releases of the plugin).
+7. Once you preview or publish the post, your recipe will be there with all your microformats... without any extra work from you!

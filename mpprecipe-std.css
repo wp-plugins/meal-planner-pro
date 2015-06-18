@@ -1,0 +1,193 @@
+/* ZLRecipe-Std.css
+A base stylesheet for the MealPlannerPro Recipe Plugin
+Plugin URI: http://www.mealplannerpro.com/
+Plugin GitHub: https://github.com/Ziplist/recipe_plugin
+Plugin Description: A plugin that adds all the necessary microdata to your recipes, so they will show up in Google's Recipe Search
+Author: MealPlannerPro.com
+Author URI: http://www.mealplannerpro.com/
+License: GPLv3 or later, unless specified
+
+Copyright 2011, 2012, 2013, 2014 MealPlannerPro, Inc.
+*/
+
+/* RESETS */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+#mpprecipe-container html, #mpprecipe-container body, #mpprecipe-container div, #mpprecipe-container span, #mpprecipe-container applet, #mpprecipe-container object, #mpprecipe-container iframe,
+#mpprecipe-container h1, #mpprecipe-container h2, #mpprecipe-container h3, #mpprecipe-container h4, #mpprecipe-container h5, #mpprecipe-container h6, #mpprecipe-container p, #mpprecipe-container blockquote, #mpprecipe-container pre,
+#mpprecipe-container a, #mpprecipe-container abbr, #mpprecipe-container acronym, #mpprecipe-container address, #mpprecipe-container big, #mpprecipe-container cite, #mpprecipe-container code,
+#mpprecipe-container del, #mpprecipe-container dfn, #mpprecipe-container em, #mpprecipe-container img, #mpprecipe-container ins, #mpprecipe-container kbd, #mpprecipe-container q, #mpprecipe-container s, #mpprecipe-container samp,
+#mpprecipe-container small, #mpprecipe-container strike, #mpprecipe-container strong, #mpprecipe-container sub, #mpprecipe-container sup, #mpprecipe-container tt, #mpprecipe-container var,
+#mpprecipe-container b, #mpprecipe-container u, #mpprecipe-container i, #mpprecipe-container center,
+#mpprecipe-container dl, #mpprecipe-container dt, #mpprecipe-container dd, #mpprecipe-container ol, #mpprecipe-container ul, #mpprecipe-container li,
+#mpprecipe-container fieldset, #mpprecipe-container form, #mpprecipe-container label, #mpprecipe-container legend,
+#mpprecipe-container table, #mpprecipe-container caption, #mpprecipe-container tbody, #mpprecipe-container tfoot, #mpprecipe-container thead, #mpprecipe-container tr, #mpprecipe-container th, #mpprecipe-container td,
+#mpprecipe-container article, #mpprecipe-container aside, #mpprecipe-container canvas, #mpprecipe-container details, #mpprecipe-container embed, #mpprecipe-container figure,
+#mpprecipe-container figcaption, #mpprecipe-container footer, #mpprecipe-container header, #mpprecipe-container hgroup, #mpprecipe-container menu,
+#mpprecipe-container nav, #mpprecipe-container output, #mpprecipe-container ruby, #mpprecipe-container section, #mpprecipe-container summary,
+#mpprecipe-container time, #mpprecipe-container mark, #mpprecipe-container audio, #mpprecipe-container video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+#mpprecipe-container article, #mpprecipe-container aside, #mpprecipe-container details, #mpprecipe-container figcaption, #mpprecipe-container figure, #mpprecipe-container 
+footer, #mpprecipe-container header, #mpprecipe-container hgroup, #mpprecipe-container menu, #mpprecipe-container nav, #mpprecipe-container section {
+	display: block;
+}
+#mpprecipe-container ol, #mpprecipe-container ul {
+	list-style: none;
+}
+#mpprecipe-container blockquote, #mpprecipe-container q {
+	quotes: none;
+}
+#mpprecipe-container blockquote:before, #mpprecipe-container blockquote:after,
+#mpprecipe-container q:before, #mpprecipe-container q:after {
+	content: '';
+	content: none;
+}
+#mpprecipe-container table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* END RESETS */
+
+/* BASE */
+#mpprecipe-container p {
+  line-height: 1.2em;
+  margin: 1em 0;
+}
+#mpprecipe-container ul {
+  margin: 1em;
+  padding: 0 0 0 2.4em;
+}
+#mpprecipe-container ol {
+  list-style-type: decimal;
+  margin: 1em 0;
+  padding: 0 0 0 3em;
+}
+/* END BASE */
+
+/* TYPOGRAPHY */
+#mpprecipe-container .heading-one, #mpprecipe-container .h-1 { font-size: 2em; line-height: 1.3em; }
+#mpprecipe-container .heading-two, #mpprecipe-container .h-2 { font-size: 1.75em; }
+#mpprecipe-container .heading-three, #mpprecipe-container .h-3 { font-size: 1.5em }
+#mpprecipe-container .heading-four, #mpprecipe-container .h-4 { font-size: 1.25em }
+
+#mpprecipe-container .bold, #mpprecipe-container .strong { font-weight: bold; }
+#mpprecipe-container .italic, #mpprecipe-container .em { font-style: italic; }
+
+#mpprecipe-container .serif { font-family: palatino, 'palatino linotype', Georgia, 'Times New Roman', Times, serif; }
+#mpprecipe-container .sans-serif { font-family: 'helvetica neue', helvetica, arial, verdana, sans-serif; }
+
+.text-align-center, .t-a-c { text-align: center; }
+/* END TYPOGRAPHY */
+
+/* FORMATTING */
+#mpprecipe-container .padding-all, #mpprecipe-container .p-a { padding: 1em; }
+#mpprecipe-container .padding-top, #mpprecipe-container .p-t { padding-top: 1em; }
+#mpprecipe-container .padding-right, #mpprecipe-container .p-r { padding-right: 1em; }
+#mpprecipe-container .padding-bottom, #mpprecipe-container .p-b { padding-bottom: 1em; }
+#mpprecipe-container .padding-left, #mpprecipe-container .p-l { padding-left: 1em; }
+
+#mpprecipe-container .float-left, #mpprecipe-container .fl-l { float: left; }
+#mpprecipe-container .float-right, #mpprecipe-container .fl-r { float: right; }
+
+#mpprecipe-container .width-50, #mpprecipe-container .w-50 { width: 50%; }
+
+#mpprecipe-container .clear, #mpprecipe-container .zlclear { clear: both; }
+
+#mpprecipe-container .texthide { text-indent: -9999px; }
+#mpprecipe-container .hide-card { display: none; } /* used to hide things in the recipe card (web) view */
+
+#mpprecipe-container .border-bottom, #mpprecipe-container .b-b { border-bottom: 1px solid #000; }
+#mpprecipe-container .border-top, #mpprecipe-container .b-t { border-top: 1px solid #000; }
+/* END FORMATTING */
+
+/* SPECIFIC ELEMENT STYLES */
+#mpprecipe-container { padding: 10px; }
+#mpprecipe-container #mpprecipe-title { padding-bottom: 0.5em; }
+#mpprecipe-container .mpprecipe-print-link {
+	padding-left: 0.5em;
+	margin-top: 5px;
+}
+#mpprecipe-container .mpp-recipe-link {
+	margin-top: 5px;
+}
+
+#mpprecipe-container .meta, #mpprecipe-container .zlmeta {
+  font-size: 0.85em;
+  font-weight: bold;
+}
+#mpprecipe-container .meta span, #mpprecipe-container .zlmeta span { font-weight: normal; }
+
+#mpprecipe-rating .rating {
+  background: url('http://ab-assets.mealplannerpro.com.s3.amazonaws.com/star-rating.gif') no-repeat scroll 0 0;
+  display: inline-block;
+  height: 14px;
+  text-indent: -9999px;
+  width: 80px;
+}
+#mpprecipe-container #mpprecipe-rating .rating-5 { background-position: 0 0; }
+#mpprecipe-container #mpprecipe-rating .rating-45 { background-position: 0 -14px; }
+#mpprecipe-container #mpprecipe-rating .rating-4 { background-position: 0 -28px; }
+#mpprecipe-container #mpprecipe-rating .rating-35 { background-position: 0 -42px; }
+#mpprecipe-container #mpprecipe-rating .rating-3 { background-position: 0 -56px; }
+#mpprecipe-container #mpprecipe-rating .rating-25 { background-position: 0 -70px; }
+#mpprecipe-container #mpprecipe-rating .rating-2 { background-position: 0 -84px; }
+#mpprecipe-container #mpprecipe-rating .rating-15 { background-position: 0 -98px; }
+#mpprecipe-container #mpprecipe-rating .rating-1 { background-position: 0 -112px; }
+#mpprecipe-container #mpprecipe-rating .rating-05 { background-position: 0 -126px; }
+#mpprecipe-container #mpprecipe-rating .rating-0 { background-position: 0 -140px; }
+
+#mpprecipe-container #mpprecipe-ingredients-list, #mpprecipe-container #mpprecipe-instructions-list { line-height: 1.5em; }
+
+#mpprecipe-container #mpprecipe-ingredients-list li {
+  list-style-type: none;
+}
+
+#mpprecipe-container #mpprecipe-ingredients-list .ingredient-label,
+#mpprecipe-container #mpprecipe-instructions-list .instruction-label {
+  position: relative;
+  left: -10px;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+#mpprecipe-container #mpprecipe-instructions-list { margin: 0 0.5em; }
+
+#mpprecipe-container #mpprecipe-notes-list {
+	margin: 0 10px;
+	padding: 0 10px;
+}
+
+#mpprecipe-container .img-desc-wrap {
+  background-color: #efefef;
+  padding-top: 1px;
+}
+
+#mpprecipe-container .img-desc-wrap img.photo { width:545px; }
+#mpprecipe-container .img-desc-wrap #mpprecipe-summary { padding:0 10px 10px; }
+#mpprecipe-container #mpprecipe-summary .summary { margin: 10px 0; }
+
+#mpprecipe-container .mpp-linkback { font-size: 0.9em; color: #aaa; margin-top: 4em; }
+#mpprecipe-container #mpp-printed-permalink { display:none; font-size: 0.7em; }
+#mpprecipe-container #mpp-printed-copyright-statement { display:none; font-size: 0.9em; }
+
+.mpprecipe-container-border #mpprecipe-beacon { display:none; }
+
+/* END SPECIFIC ELEMENT STYLES */
+
+.mpp-rmvd {
+	height: 27px;
+	width: 105px;
+	visibility: hidden;
+	pointer-events: none;
+	cursor: default;
+}
