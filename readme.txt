@@ -1,4 +1,4 @@
-=== MealPlannerPro Recipe Plugin ===
+=== Meal Planner Pro Recipe Plugin ===
 Contributors: Meal Planner Pro Inc., codeswan
 Plugin Name: Meal Planner Pro Recipes
 Plugin URI: http://mealplannerpro.com/wordpress-recipe-plugin
