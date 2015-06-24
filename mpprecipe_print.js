@@ -3,7 +3,7 @@ Plugin Name: MealPlannerPro Recipe Plugin
 Plugin URI: http://www.mealplannerpro.com/recipe_plugin
 Plugin GitHub: https://github.com/Ziplist/recipe_plugin
 Description: A plugin that adds all the necessary microdata to your recipes, so they will show up in Google's Recipe Search
-Version: 3.1
+Version: 3.6
 Author: MealPlannerPro.com
 Author URI: http://www.mealplannerpro.com/
 License: Direct license by original author - http://www.808.dk/?code-javascript-print 

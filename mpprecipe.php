@@ -4,7 +4,7 @@ Plugin Name: MealPlannerPro Recipe Plugin
 Plugin URI: http://www.mealplannerpro.com/recipe_plugin
 Plugin GitHub: https://github.com/Ziplist/recipe_plugin
 Description: A plugin that adds all the necessary microdata to your recipes, so they will show up in Google's Recipe Search
-Version: 3.1
+Version: 3.6
 Author: MealPlannerPro.com
 Author URI: http://www.mealplannerpro.com/
 License: GPLv3 or later
@@ -40,7 +40,7 @@ if (!defined('MPPRECIPE_VERSION_KEY'))
     define('MPPRECIPE_VERSION_KEY', 'mpprecipe_version');
 
 if (!defined('MPPRECIPE_VERSION_NUM'))
-    define('MPPRECIPE_VERSION_NUM', '3.1');
+    define('MPPRECIPE_VERSION_NUM', '3.6');
 
 if (!defined('MPPRECIPE_PLUGIN_DIRECTORY'))
 		define('MPPRECIPE_PLUGIN_DIRECTORY', plugins_url() . '/' . dirname(plugin_basename(__FILE__)) . '/');
@@ -70,7 +70,7 @@ function sanitize( $i )
             $i = stripslashes($i);
 
         $i = strip($i);
-        $o = mysql_real_escape_string($i);
+        $o = mysql_escape_string($i);
     }
     return $o;
 }
@@ -117,6 +117,8 @@ add_option('mpprecipe_outer_border_style', '');
 add_option('mpprecipe_custom_save_image', '');
 add_option('mpprecipe_custom_print_image', '');
 
+define('MPPRECIPE_AUTO_HANDLE_TOTALTIME',0);
+
 register_activation_hook(__FILE__, 'mpprecipe_install');
 add_action('plugins_loaded', 'mpprecipe_install');
 
@@ -149,7 +151,7 @@ if (strpos($_SERVER['REQUEST_URI'], 'media-upload.php') && strpos($_SERVER['REQU
 
 global $mpprecipe_db_version;
 // This must be changed when the DB structure is modified
-$mpprecipe_db_version = "3.1";	
+$mpprecipe_db_version = "3.6";	
 
 // Creates MPPRecipe tables in the db if they don't exist already.
 // Don't do any data initialization in this routine as it is called on both install as well as
@@ -575,7 +577,7 @@ function mpprecipe_iframe_content($post_info = null, $get_info = null) {
             $prep_time_input = '';
             $cook_time_input = '';
             $total_time_input = '';
-            if (class_exists('DateInterval')) {
+            if (class_exists('DateInterval') and MPPRECIPE_AUTO_HANDLE_TOTALTIME ) {
                 try {
                     $prep_time = new DateInterval($recipe->prep_time);
                     $prep_time_seconds = $prep_time->s;
@@ -753,6 +755,21 @@ function mpprecipe_iframe_content($post_info = null, $get_info = null) {
         $submitform .= "<script>window.onload = MPPRecipeSubmitForm;</script>";
     }
 
+    if (class_exists('DateInterval') and MPPRECIPE_AUTO_HANDLE_TOTALTIME ) 
+        $total_time_input_container = '';
+    else
+    {
+        $total_time_input_container = <<<HTML
+                <p class="cls"><label>Total Time</label>
+                    $total_time_input
+                    <span class="time">
+                        <span><input type='number' min="0" max="240" id='total_time_hours' name='total_time_hours' value='$total_time_hours' /><label>hours</label></span>
+                        <span><input type='number' min="0" max="60"  id='total_time_minutes' name='total_time_minutes' value='$total_time_minutes' /><label>minutes</label></span>
+                    </span>
+                </p>
+HTML;
+    }
+
     echo <<< HTML
 
 <!DOCTYPE html>
@@ -820,24 +837,18 @@ function mpprecipe_iframe_content($post_info = null, $get_info = null) {
                 <p class="cls"><label>Prep Time</label>
                     $prep_time_input
                     <span class="time">
-                        <span><input type='number' min="0" max="24" name='prep_time_hours' value='$prep_time_hours' /><label>hours</label></span>
-                        <span><input type='number' min="0" max="60" name='prep_time_minutes' value='$prep_time_minutes' /><label>minutes</label></span>
+                        <span><input type='number' min="0" max="24" id='prep_time_hours' name='prep_time_hours' value='$prep_time_hours' /><label>hours</label></span>
+                        <span><input type='number' min="0" max="60" id='prep_time_minutes' name='prep_time_minutes' value='$prep_time_minutes' /><label>minutes</label></span>
                     </span>
                 </p>
                 <p class="cls"><label>Cook Time</label>
                     $cook_time_input
                     <span class="time">
-                    	<span><input type='number' min="0" max="24" name='cook_time_hours' value='$cook_time_hours' /><label>hours</label></span>
-                        <span><input type='number' min="0" max="60" name='cook_time_minutes' value='$cook_time_minutes' /><label>minutes</label></span>
+                    	<span><input type='number' min="0" max="24" id='cook_time_hours' name='cook_time_hours' value='$cook_time_hours' /><label>hours</label></span>
+                        <span><input type='number' min="0" max="60" id='cook_time_minutes' name='cook_time_minutes' value='$cook_time_minutes' /><label>minutes</label></span>
                     </span>
                 </p>
-                <p class="cls"><label>Total Time</label>
-                    $total_time_input
-                    <span class="time">
-                        <span><input type='number' min="0" max="240" name='total_time_hours' value='$total_time_hours' /><label>hours</label></span>
-                        <span><input type='number' min="0" max="60" name='total_time_minutes' value='$total_time_minutes' /><label>minutes</label></span>
-                    </span>
-                </p>
+                $total_time_input_container
                 <p><label>Yield</label> <input type='text' name='yield' value='$yield' /></p>
                 <p><label>Serving Size</label> <input type='text' name='serving_size' value='$serving_size' /></p>
                 <p><label>Calories</label> <input type='text' name='calories' value='$calories' /></p>
@@ -848,119 +859,105 @@ function mpprecipe_iframe_content($post_info = null, $get_info = null) {
         </div>
     </form>
 </body>
+
+<script>
+        var g = function( id ) { return document.getElementById( id ) }
+        var v = function( id ) {
+            var v = parseInt( g(id).value )  
+            return isNaN( v ) ? 0 : v
+        }
+
+        function calc()
+        {
+            var h = v('cook_time_hours')   + v('prep_time_hours')
+            var m = v('cook_time_minutes') + v('prep_time_minutes')
+
+            var h_from_m  = Math.floor(m/60)
+
+            // minutes after hour-equivalents removed
+            var m = m % (60*Math.max(h_from_m,1)) 
+            var h = h + h_from_m
+
+            g('total_time_hours').value   =  h
+            g('total_time_minutes').value =  m
+        }
+
+        g('cook_time_hours').onchange   = calc
+        g('cook_time_minutes').onchange = calc
+        g('prep_time_hours').onchange   = calc
+        g('prep_time_minutes').onchange = calc
+
+</script>
+
 HTML;
+}
+
+/**
+ * Deal with the aggregation of input duration-time parts.
+ */
+function collate_time_input( $type, $post )
+{
+    $duration_units = array(
+        $type . '_time_years'  => 'Y',
+        $type . '_time_months' => 'M',
+        $type . '_time_days'   => 'D',
+    );
+    $time_units    = array(
+        $type . '_time_hours'   => 'H',
+        $type . '_time_minutes' => 'M',
+        $type . '_time_seconds' => 'S',
+    );
+
+    if (!( $post[$type . '_time_years']   || $post[$type . '_time_months'] 
+        || $post[$type . '_time_days']    || $post[$type . '_time_hours'] 
+        || $post[$type . '_time_minutes'] || $post[$type . '_time_seconds']
+    ))
+        $o = $post[$type . '_time'];
+    else
+    {
+        $o = 'P';
+        foreach($duration_units as $d => $u)
+        {
+            if( $post[$d] ) $time .= $post[$d] . $u;
+        }
+        if (   $post[$type . '_time_hours'] 
+            || $post[$type . '_time_minutes'] 
+            || $post[$type . '_time_seconds']
+        )
+            $o .= 'T';
+        foreach( $time_units as $t => $u )
+        {
+            if( $post[$t] ) $o .= $post[$t] . $u;
+        }
+    } 
+
+    return $o;
 }
 
 // Inserts the recipe into the database
 function mpprecipe_insert_db($post_info) {
     global $wpdb;
 
-    $recipe_id = $post_info["recipe_id"];
-
-    if ($post_info["prep_time_years"] || $post_info["prep_time_months"] || $post_info["prep_time_days"] || $post_info["prep_time_hours"] || $post_info["prep_time_minutes"] || $post_info["prep_time_seconds"]) {
-        $prep_time = 'P';
-        if ($post_info["prep_time_years"]) {
-            $prep_time .= $post_info["prep_time_years"] . 'Y';
-        }
-        if ($post_info["prep_time_months"]) {
-            $prep_time .= $post_info["prep_time_months"] . 'M';
-        }
-        if ($post_info["prep_time_days"]) {
-            $prep_time .= $post_info["prep_time_days"] . 'D';
-        }
-        if ($post_info["prep_time_hours"] || $post_info["prep_time_minutes"] || $post_info["prep_time_seconds"]) {
-            $prep_time .= 'T';
-        }
-        if ($post_info["prep_time_hours"]) {
-            $prep_time .= $post_info["prep_time_hours"] . 'H';
-        }
-        if ($post_info["prep_time_minutes"]) {
-            $prep_time .= $post_info["prep_time_minutes"] . 'M';
-        }
-        if ($post_info["prep_time_seconds"]) {
-            $prep_time .= $post_info["prep_time_seconds"] . 'S';
-        }
-    } else {
-        $prep_time = $post_info["prep_time"];
-    }
-
-    if ($post_info["cook_time_years"] || $post_info["cook_time_months"] || $post_info["cook_time_days"] || $post_info["cook_time_hours"] || $post_info["cook_time_minutes"] || $post_info["cook_time_seconds"]) {
-        $cook_time = 'P';
-        if ($post_info["cook_time_years"]) {
-            $cook_time .= $post_info["cook_time_years"] . 'Y';
-        }
-        if ($post_info["cook_time_months"]) {
-            $cook_time .= $post_info["cook_time_months"] . 'M';
-        }
-        if ($post_info["cook_time_days"]) {
-            $cook_time .= $post_info["cook_time_days"] . 'D';
-        }
-        if ($post_info["cook_time_hours"] || $post_info["cook_time_minutes"] || $post_info["cook_time_seconds"]) {
-            $cook_time .= 'T';
-        }
-        if ($post_info["cook_time_hours"]) {
-            $cook_time .= $post_info["cook_time_hours"] . 'H';
-        }
-        if ($post_info["cook_time_minutes"]) {
-            $cook_time .= $post_info["cook_time_minutes"] . 'M';
-        }
-        if ($post_info["cook_time_seconds"]) {
-            $cook_time .= $post_info["cook_time_seconds"] . 'S';
-        }
-    } else {
-        $cook_time = $post_info["cook_time"];
-    }
-
-    if ($post_info["total_time_years"] || $post_info["total_time_months"] || $post_info["total_time_days"] || $post_info["total_time_hours"] || $post_info["total_time_minutes"] || $post_info["total_time_seconds"]) {
-        $total_time = 'P';
-        if ($post_info["total_time_years"]) {
-            $total_time .= $post_info["total_time_years"] . 'Y';
-        }
-        if ($post_info["total_time_months"]) {
-            $total_time .= $post_info["total_time_months"] . 'M';
-        }
-        if ($post_info["total_time_days"]) {
-            $total_time .= $post_info["total_time_days"] . 'D';
-        }
-        if ($post_info["total_time_hours"] || $post_info["total_time_minutes"] || $post_info["total_time_seconds"]) {
-            $total_time .= 'T';
-        }
-        if ($post_info["total_time_hours"]) {
-            $total_time .= $post_info["total_time_hours"] . 'H';
-        }
-        if ($post_info["total_time_minutes"]) {
-            $total_time .= $post_info["total_time_minutes"] . 'M';
-        }
-        if ($post_info["total_time_seconds"]) {
-            $total_time .= $post_info["total_time_seconds"] . 'S';
-        }
-    } else {
-        $total_time = $post_info["total_time"];
-    }
-
-    $recipe = array (
-        "recipe_title" =>  $post_info["recipe_title"],
-        "recipe_image" => $post_info["recipe_image"],
-        "summary" =>  $post_info["summary"],
-        "rating" => $post_info["rating"],
-        "prep_time" => $prep_time,
-        "cook_time" => $cook_time,
-        "total_time" => $total_time,
-        "yield" =>  $post_info["yield"],
-        "serving_size" =>  $post_info["serving_size"],
-        "calories" => $post_info["calories"],
-        "fat" => $post_info["fat"],
-        "ingredients" => $post_info["ingredients"],
-        "instructions" => $post_info["instructions"],
-        "notes" => $post_info["notes"],
+    $recipe      = array ();
+    $recipe_keys = array (
+        "recipe_title" , "recipe_image", "summary", "rating", "yield", 
+        "serving_size", "calories", "fat", "ingredients", "instructions", 
+        "notes"
     );
+    foreach( $recipe_keys as $k )
+        $recipe[ $k ] = $post_info[ $k ];
 
-    if (mpprecipe_select_recipe_db($recipe_id) == null) {
-    	$recipe["post_id"] = $post_info["post_id"];	// set only during record creation
+    $recipe["prep_time"]  = collate_time_input( 'prep',  $post_info );
+    $recipe["cook_time"]  = collate_time_input( 'cook',  $post_info );
+    $recipe["total_time"] = collate_time_input( 'total', $post_info );
+
+    if( mpprecipe_select_recipe_db($recipe_id) )
+        $wpdb->update( $wpdb->prefix . "mpprecipe_recipes", $recipe, array( 'recipe_id' => $recipe_id ));
+    else
+    {
+    	$recipe["post_id"] = $post_info["post_id"];
         $wpdb->insert( $wpdb->prefix . "mpprecipe_recipes", $recipe );
         $recipe_id = $wpdb->insert_id;
-    } else {
-        $wpdb->update( $wpdb->prefix . "mpprecipe_recipes", $recipe, array( 'recipe_id' => $recipe_id ));
     }
 
     return $recipe_id;
@@ -1096,20 +1093,30 @@ function mpprecipe_select_recipe_db($recipe_id, $table = 'mpprecipe_recipes' ) {
 }
 
 // Format an ISO8601 duration for human readibility
-function mpprecipe_format_duration($duration) {
-	$date_abbr = array('y' => 'year', 'm' => 'month', 'd' => 'day', 'h' => 'hour', 'i' => 'minute', 's' => 'second');
+function mpprecipe_format_duration($duration) 
+{
+    $date_abbr = array(
+        'y' => 'year', 'm' => 'month', 
+        'd' => 'day', 'h' => 'hour', 
+        'i' => 'minute', 's' => 'second'
+    );
 	$result = '';
 
-	if (class_exists('DateInterval')) {
+    if (class_exists('DateInterval'))
+    {
 		try {
-			$result_object = new DateInterval($duration);
+            if( !($duration instanceof DateInterval ))
+		        $duration = new DateInterval($duration);
 
-			foreach ($date_abbr as $abbr => $name) {
-				if ($result_object->$abbr > 0) {
-					$result .= $result_object->$abbr . ' ' . $name;
-					if ($result_object->$abbr > 1) {
+            foreach ($date_abbr as $abbr => $name) 
+            {
+                if ($duration->$abbr > 0) 
+                {
+					$result .= $duration->$abbr . ' ' . $name;
+
+					if ($duration->$abbr > 1) 
 						$result .= 's';
-					}
+
 					$result .= ', ';
 				}
 			}
@@ -1120,17 +1127,23 @@ function mpprecipe_format_duration($duration) {
 		}
 	} else { // else we have to do the work ourselves so the output is pretty
 		$arr = explode('T', $duration);
-		$arr[1] = str_replace('M', 'I', $arr[1]); // This mimics the DateInterval property name
+
+        // This mimics the DateInterval property name
+        $arr[1]   = str_replace('M', 'I', $arr[1]); 
+
 		$duration = implode('T', $arr);
 
-		foreach ($date_abbr as $abbr => $name) {
-		if (preg_match('/(\d+)' . $abbr . '/i', $duration, $val)) {
-				$result .= $val[1] . ' ' . $name;
-				if ($val[1] > 1) {
-					$result .= 's';
-				}
-				$result .= ', ';
-			}
+        foreach ($date_abbr as $abbr => $name) 
+        {
+            if (preg_match('/(\d+)' . $abbr . '/i', $duration, $val))
+            {
+                $result .= $val[1] . ' ' . $name;
+
+                if ($val[1] > 1)
+                    $result .= 's';
+
+                $result .= ', ';
+            }
 		}
 
 		$result = trim($result, ' \t,');
@@ -1264,14 +1277,36 @@ function mpprecipe_format_recipe($recipe) {
         }
         $output .= '<span itemprop="cookTime" content="' . $recipe->cook_time . '">' . $cook_time . '</span></p>';
     }
-    if ($recipe->total_time != null) {
-        $total_time = mpprecipe_format_duration($recipe->total_time);
 
+
+    $total_time         = null;
+    $total_time_content = null;
+
+    if ($recipe->total_time != null)
+    {
+        $total_time         = mpprecipe_format_duration($recipe->total_time);
+        $total_time_content = $recipe->total_time;
+    }
+    elseif( ($recipe->prep_time || $recipe->cook_time ) and class_exists( 'DateInterval' ) and MPPRECIPE_AUTO_HANDLE_TOTALTIME )
+    { 
+        $t1 = new DateTime();
+        $t2 = new DateTime();
+
+        if( $recipe->prep_time ) $t1->add( new DateInterval($recipe->prep_time));
+        if( $recipe->cook_time ) $t1->add( new DateInterval($recipe->cook_time));
+
+        $ti = $t2->diff($t1);
+        $total_time_content = $ti->format('P%yY%mM%dDT%hH%iM%sS');
+    }
+
+    if( $total_time_content )
+    {
+        $total_time = mpprecipe_format_duration($total_time_content);
         $output .= '<p id="mpprecipe-total-time">';
-        if (strcmp(get_option('mpprecipe_total_time_label_hide'), 'Hide') != 0) {
+        if (strcmp(get_option('mpprecipe_total_time_label_hide'), 'Hide') != 0) 
             $output .= get_option('mpprecipe_total_time_label') . ' ';
-        }
-        $output .= '<span itemprop="totalTime" content="' . $recipe->total_time . '">' . $total_time . '</span></p>';
+
+        $output .= '<span itemprop="totalTime" content="' . $total_time_content . '">' . $total_time . '</span></p>';
     }
 
     //!! close the first container div and open the second
