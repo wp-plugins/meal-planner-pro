@@ -1,4 +1,4 @@
-=== Meal Planner Pro Recipe Plugin ===
+=== Meal Planner Pro Recipes ===
 Contributors: Meal Planner Pro Inc., codeswan
 Plugin Name: Meal Planner Pro Recipes
 Plugin URI: http://mealplannerpro.com/wordpress-recipe-plugin
@@ -7,7 +7,7 @@ License: GPLv3 or later
 Author URI: http://www.mealplannerpro.com/
 Author: Meal Planner Pro Inc.
 Donate link: http://sushiday.com/recipe-seo-plugin/
-Tags: google rich snippets, hrecipe, print recipe, recipe, recipe card, recipe seo, schema.org, seo
+Tags: google rich snippets, hrecipe, print recipe, recipe, recipe card, recipe seo, schema.org, seo, recipes, recipe box, shopping list, grocery list, meal planner, meal planning, nutrition, save recipe, groceries
 Requires at least: 3.1
 Tested up to: 4.2
 Stable tag: 4
