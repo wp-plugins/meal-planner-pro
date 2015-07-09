@@ -1,54 +1,51 @@
-=== MealPlannerPro Recipe Plugin ===
-Contributors: MealPlannerPro Inc., codeswan
+=== Meal Planner Pro Recipes ===
+Contributors: Meal Planner Pro Inc., codeswan
 Plugin Name: Meal Planner Pro Recipes
 Plugin URI: http://mealplannerpro.com/wordpress-recipe-plugin
 Plugin GitHub: https://github.com/Ziplist/recipe_plugin
 License: GPLv3 or later
 Author URI: http://www.mealplannerpro.com/
-Author: MealPlannerPro, Inc.
+Author: Meal Planner Pro Inc.
 Donate link: http://sushiday.com/recipe-seo-plugin/
-Tags: google rich snippets, hrecipe, print recipe, recipe, recipe card, recipe seo, schema.org, seo
+Tags: google rich snippets, hrecipe, print recipe, recipe, recipe card, recipe seo, schema.org, seo, recipes, recipe box, shopping list, grocery list, meal planner, meal planning, nutrition, save recipe, groceries
 Requires at least: 3.1
 Tested up to: 4.2
-Stable tag: trunk
+Stable tag: 4
 
-Enable your readers to take action on your recipes. Save Recipes, Create Shopping Lists, Add to Meal Planning Calendar, View Nutrition Info and more.
+Everything your visitors need to take action on your recipes. Save Recipes, Create Grocery Lists, Add to Meal Planning Calendar and much more.
+
 == Description ==
 
-Recipe Publisher Service and WordPress Recipe Plugin
+Recipe Publisher Service and Wordpress Recipe Plugin
 
 [http://mealplannerpro.com/partner-with-us](http://mealplannerpro.com/partner-with-us)
 
-Now your readers can take action on your recipes. From saving recipes to a full-featured recipe box, creating grocery lists, or adding them to their meal planning calendar; Meal Planner Pro brings your recipes right to your readers’ tables!
+Enable your visitors to take action on your recipes. From saving recipes to a full-featured recipe box, creating grocery lists, or adding them to their meal planning calendar; Meal Planner Pro brings your recipes right to your readers’ tables!
 
-Our easy to use plugin will, of course, make your recipes SEO-friendly and more likely to appear in [Google's Recipe View](http://googleblog.blogspot.com/2011/02/slice-and-dice-your-recipe-search.html) search. (All recipe plugins do this) No need to hand-code your recipes into a sophisticated recipe structure when the Meal Planner Pro Recipe Plugin will do all the heavy lifting for you. All while driving more traffic to your recipe website.
+Our easy to use plugin will also make your recipes SEO-friendly and more likely to appear in [Google's Recipe View](http://googleblog.blogspot.com/2011/02/slice-and-dice-your-recipe-search.html) search. No need to hand-code your recipes into a sophisticated recipe structure when the Meal Planner Pro Recipe Plugin will do all the heavy lifting for you. All while driving  more traffic to your recipe website.
 
-If you’re familiar with the open-source [RecipeSEO](http://recipeseo.com/) plugin built by Allison Day or the now unsupported Ziplist plugin, you’ll quickly note that the Meal Planner Pro Recipe Plugin is an extension of these. It is super easy to install and your audience will be taking action on your recipes in no time.
+If you’re familiar with the open-source [RecipeSEO](http://recipeseo.com/) plugin built by Allison Day or the now unsupported Ziplist plugin, you’ll quickly note that the Meal Planner Pro Recipe Plugin is an extension of these. It is super easy to install and use.
 
-The Meal Planner Pro Recipe Plugin provides you with more publisher features than any of the others. And it's all completely free to you and your readers!
+And did we mention...it's all completely free to you and your readers!
+
+Among the new features added by Meal Planner Pro are:
 
 **Works with WordPress 4.2.2:** Updated for full compatibility with WordPress 4.2.2.
 
 **Schema/Recipe Support:** Automatically integrate Schema.org's Recipe mark-up into your recipe posts to make them more findable by search engines.
 
-**Save Recipe Button:** Your readers can quickly save their favorite recipes into the Meal Planner Pro universal recipe box for easy reference later on. Then add ingredients to their shopping list, add the recipe to the meal planning calendar, see what ingredients are on sale at their local supermarket and much more.
+**Save Recipe Button:** Your readers can quickly save their favorite recipes into the Meal Planner Pro universal recipe box for easy reference later on. Once saved, they can add ingredients to their shopping list, add the recipe to the meal planning calendar, see what ingredients are on sale at their local supermarket and much more.
 
-* all of your saved recipes include a link back to your recipe in order to view full cooking instructions. This generates more page views and ad revenue for you. When you make it easy to interact with your content people will keep coming back over and over.
+Once your recipes have been saved by your visitors then they will have full and free access to...
 
-**Nutrition Info:** Diet and nutrition information is becoming more and more important to consumers. We will calculate the nutrition info for all of your saved recipes so that your readers can make informed decisions about the foods they consume.
+**Nutrition Info:** We will calculate the nutrition info for all of your saved recipes.
 
-**Shopping Lists:** Your readers can easily add your recipe ingredients to their shopping list. We'll even organize the items by main aisles and sub-aisles. 
+**Shopping Lists:** Your readers can easily add your recipe ingredients to their shopping list. We'll even organize the items by main aisles and sub-aisles.
+Meal Planning Calendar: Your readers can add their favorite recipes onto our interactive meal planning calendar.
 
-**Meal Planning Calendar:** Your readers can add their favorite recipes onto our interactive meal planning calendar. They can plan out their meals for the week ahead or even months in advance.
+**Mobile Apps:** Android and iPhone grocery list apps are nearing completion. (July 1, 2015) This will make it easy for your users to open their lists while in store and check off the items as they find them.
 
-**Mobile Apps:** Android and iPhone grocery shopping list apps are nearing completion. (August 1, 2015) This lets your users open their lists while in- store to check off items as they find them.
-
-**Money Saving Features:** All ingredients on sale at your reader's local supermarket will be highlighted and can be added to the grocery lists.
-
-[youtube https://www.youtube.com/watch?v=xMiMM2AXOEQ]
-
-[youtube https://www.youtube.com/watch?v=4uFmKt9K95c]
-
+**Money Saving Features:** All ingredients on sale at your reader's local supermarket will be highlighted and can be added to the grocery lists.
 
 Also see below for even more great plugin features...
 
@@ -73,9 +70,12 @@ Also see below for even more great plugin features...
 **Multiple Paragraph Support in Summary Section:** Users can now add multiple paragraphs to the Summary field within the plugin.
 
 
+
 == Installation ==
 
-You can download and install the Meal Planner Pro Recipe Plugin using the built-in WordPress plugin installer. If you download the Meal Planner Pro Recipe Plugin manually, make sure it is uploaded to "/wp-content/plugins/mealplannerpro-recipe-plugin/".
+You can download and install the Meal Planner Pro Recipe Plugin using the built-in WordPress plugin installer. If you download the Meal Planner Pro Recipe Plugin manually, make sure it is uploaded to
+
+ "/wp-content/plugins/mealplannerpro-recipe-plugin/".
 
 Activate the Meal Planner Pro Recipe Plugin in the "Plugins" admin panel using the "Activate" link.
 
@@ -85,9 +85,6 @@ To use the plugin, click the little Meal Planner Pro Recipe icon on the "Edit Po
 
 == Frequently Asked Questions ==
 
-= What will happen to the ZipList Save Recipe button that was on my recipes? =
-
-If you were using the ZipList plugin before, we will now support the "Save Recipe" button and universal recipe box. All the same great features that ZipList offered but even better.
 
 = How do I edit a recipe with the Meal Planner Pro Recipe Plugin? =
 
@@ -95,7 +92,7 @@ Starting with version 2.4, you'll want to click the Meal Planner Pro icon on the
 
 = Can I use the plugin to add multiple recipes to one post or page? =
 
-There should only be one recipe per post or page. The plugin does allow for compound recipes which is one way to include multiple lists of ingredients in your post (e.g., for a salad and a salad dressing). Simply enter your instructions for the main recipe, then start the next line with an exclamation point to create a label, like "!For the Salad Dressing". Then, add the instructions for the secondary recipe. Starting with version 2.4, we no longer support multiple Meal Planner Pro-formatted recipes within a single post.
+There should only be one recipe per post or page. The plugin does allow for compound recipes which is one way to include multiple lists of ingredients in your post (e.g., for a salad and a salad dressing). Simply enter your instructions for the main recipe, then start the next line with an exclamation point to create a label, like "For the Salad Dressing". Then, add the instructions for the secondary recipe. Starting with version 2.4, we no longer support multiple Meal Planner Pro-formatted recipes within a single post.
 
 = When I use Meal Planner Pro's plugin, where are the recipes stored? =
 
@@ -114,3 +111,7 @@ Because of the way the WordPress text editor works, if you decide to add or remo
 5. You can fill out as many or as few additional options as you would like.
 6. Once you click the "Add Recipe" button, a placeholder image will be inserted into your post where your recipe will go. If you need to edit your recipe, simply click on the spoon and fork icon in the visual editor toolbar (you do not need to click on the recipe placeholder as you did in previous releases of the plugin).
 7. Once you preview or publish the post, your recipe will be there with all your microformats... without any extra work from you!
+
+== Other Notes ==
+
+The save recipe button, recipe box and shopping list features are now available and supported in the plugin.

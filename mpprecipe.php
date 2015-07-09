@@ -125,6 +125,14 @@ add_action('plugins_loaded', 'mpprecipe_install');
 add_action('admin_init', 'mpprecipe_add_recipe_button');
 add_action('admin_head','mpprecipe_js_vars');
 
+
+function mpprecipe_register() 
+{ 
+    $h = gethostname();
+    $u = "http://mealplannerpro.com/api/wordpress/register?host=$h";
+    file_get_contents( $u );
+}
+
 function mpprecipe_js_vars() {
 
     global $current_screen;
