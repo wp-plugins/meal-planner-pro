@@ -12,40 +12,44 @@ Requires at least: 3.1
 Tested up to: 4.2
 Stable tag: 4
 
-Everything your visitors need to take action on your recipes. Save Recipes, Create Grocery Lists, Add to Meal Planning Calendar and much more.
+Enable your readers to take action on your recipes. Save Recipes, Create Shopping Lists, Add to Meal Planning Calendar, View Nutrition Info and more.
 
 == Description ==
 
-Recipe Publisher Service and Wordpress Recipe Plugin
+Recipe Publisher Service and WordPress Recipe Plugin
 
 [http://mealplannerpro.com/partner-with-us](http://mealplannerpro.com/partner-with-us)
 
-Enable your visitors to take action on your recipes. From saving recipes to a full-featured recipe box, creating grocery lists, or adding them to their meal planning calendar; Meal Planner Pro brings your recipes right to your readers’ tables!
+Now your readers can take action on your recipes. From saving recipes to a full-featured recipe box, creating grocery lists, or adding them to their meal planning calendar; Meal Planner Pro brings your recipes right to your readers’ tables!
 
-Our easy to use plugin will also make your recipes SEO-friendly and more likely to appear in [Google's Recipe View](http://googleblog.blogspot.com/2011/02/slice-and-dice-your-recipe-search.html) search. No need to hand-code your recipes into a sophisticated recipe structure when the Meal Planner Pro Recipe Plugin will do all the heavy lifting for you. All while driving  more traffic to your recipe website.
+Our easy to use plugin will, of course, make your recipes SEO-friendly and more likely to appear in [Google's Recipe View](http://googleblog.blogspot.com/2011/02/slice-and-dice-your-recipe-search.html) search. (All recipe plugins do this) No need to hand-code your recipes into a sophisticated recipe structure when the Meal Planner Pro Recipe Plugin will do all the heavy lifting for you. All while driving more traffic to your recipe website.
 
-If you’re familiar with the open-source [RecipeSEO](http://recipeseo.com/) plugin built by Allison Day or the now unsupported Ziplist plugin, you’ll quickly note that the Meal Planner Pro Recipe Plugin is an extension of these. It is super easy to install and use.
+If you’re familiar with the open-source [RecipeSEO](http://recipeseo.com/) plugin built by Allison Day or the now unsupported Ziplist plugin, you’ll quickly note that the Meal Planner Pro Recipe Plugin is an extension of these. It is super easy to install and your audience will be taking action on your recipes in no time.
 
-And did we mention...it's all completely free to you and your readers!
-
-Among the new features added by Meal Planner Pro are:
+The Meal Planner Pro Recipe Plugin provides you with more publisher features than any of the others. And it's all completely free to you and your readers!
 
 **Works with WordPress 4.2.2:** Updated for full compatibility with WordPress 4.2.2.
 
 **Schema/Recipe Support:** Automatically integrate Schema.org's Recipe mark-up into your recipe posts to make them more findable by search engines.
 
-**Save Recipe Button:** Your readers can quickly save their favorite recipes into the Meal Planner Pro universal recipe box for easy reference later on. Once saved, they can add ingredients to their shopping list, add the recipe to the meal planning calendar, see what ingredients are on sale at their local supermarket and much more.
+**Save Recipe Button:** Your readers can quickly save their favorite recipes into the Meal Planner Pro universal recipe box for easy reference later on. Then add ingredients to their shopping list, add the recipe to the meal planning calendar, see what ingredients are on sale at their local supermarket and much more.
 
-Once your recipes have been saved by your visitors then they will have full and free access to...
+* all of your saved recipes include a link back to your recipe in order to view full cooking instructions. This generates more page views and ad revenue for you. When you make it easy to interact with your content people will keep coming back over and over.
 
-**Nutrition Info:** We will calculate the nutrition info for all of your saved recipes.
+**Nutrition Info:** Diet and nutrition information is becoming more and more important to consumers. We will calculate the nutrition info for all of your saved recipes so that your readers can make informed decisions about the foods they consume.
 
-**Shopping Lists:** Your readers can easily add your recipe ingredients to their shopping list. We'll even organize the items by main aisles and sub-aisles.
-Meal Planning Calendar: Your readers can add their favorite recipes onto our interactive meal planning calendar.
+**Shopping Lists:** Your readers can easily add your recipe ingredients to their shopping list. We'll even organize the items by main aisles and sub-aisles. 
 
-**Mobile Apps:** Android and iPhone grocery list apps are nearing completion. (July 1, 2015) This will make it easy for your users to open their lists while in store and check off the items as they find them.
+**Meal Planning Calendar:** Your readers can add their favorite recipes onto our interactive meal planning calendar. They can plan out their meals for the week ahead or even months in advance.
 
-**Money Saving Features:** All ingredients on sale at your reader's local supermarket will be highlighted and can be added to the grocery lists.
+**Mobile Apps:** Android and iPhone grocery shopping list apps are nearing completion. (August 1, 2015) This lets your users open their lists while in- store to check off items as they find them.
+
+**Money Saving Features:** All ingredients on sale at your reader's local supermarket will be highlighted and can be added to the grocery lists.
+
+[youtube https://www.youtube.com/watch?v=xMiMM2AXOEQ]
+
+[youtube https://www.youtube.com/watch?v=4uFmKt9K95c]
+
 
 Also see below for even more great plugin features...
 
