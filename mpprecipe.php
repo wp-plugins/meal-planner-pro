@@ -4,7 +4,7 @@ Plugin Name: MealPlannerPro Recipe Plugin
 Plugin URI: http://www.mealplannerpro.com/recipe_plugin
 Plugin GitHub: https://github.com/Ziplist/recipe_plugin
 Description: A plugin that adds all the necessary microdata to your recipes, so they will show up in Google's Recipe Search
-Version: 3.7
+Version: 3.8
 Author: MealPlannerPro.com
 Author URI: http://www.mealplannerpro.com/
 License: GPLv3 or later
@@ -40,7 +40,7 @@ if (!defined('MPPRECIPE_VERSION_KEY'))
     define('MPPRECIPE_VERSION_KEY', 'mpprecipe_version');
 
 if (!defined('MPPRECIPE_VERSION_NUM'))
-    define('MPPRECIPE_VERSION_NUM', '3.7');
+    define('MPPRECIPE_VERSION_NUM', '3.8');
 
 if (!defined('MPPRECIPE_PLUGIN_DIRECTORY'))
 		define('MPPRECIPE_PLUGIN_DIRECTORY', plugins_url() . '/' . dirname(plugin_basename(__FILE__)) . '/');
@@ -106,10 +106,6 @@ add_option('mpprecipe_yield_label', 'Yield:');
 add_option('mpprecipe_yield_label_hide', '');
 add_option('mpprecipe_serving_size_label', 'Serving Size:');
 add_option('mpprecipe_serving_size_label_hide', '');
-add_option('mpprecipe_calories_label', 'Calories per serving:');
-add_option('mpprecipe_calories_label_hide', '');
-add_option('mpprecipe_fat_label', 'Fat per serving:');
-add_option('mpprecipe_fat_label_hide', '');
 add_option('mpprecipe_rating_label', 'Rating:');
 add_option('mpprecipe_rating_label_hide', '');
 add_option('mpprecipe_image_width', '');
@@ -159,7 +155,7 @@ if (strpos($_SERVER['REQUEST_URI'], 'media-upload.php') && strpos($_SERVER['REQU
 
 global $mpprecipe_db_version;
 // This must be changed when the DB structure is modified
-$mpprecipe_db_version = "3.7";	
+$mpprecipe_db_version = "3.8";	
 
 // Creates MPPRecipe tables in the db if they don't exist already.
 // Don't do any data initialization in this routine as it is called on both install as well as
@@ -264,10 +260,6 @@ function mpprecipe_settings() {
         $yield_label_hide                  = $_POST['yield-label-hide'];
         $serving_size_label                = $_POST['serving-size-label'];
         $serving_size_label_hide           = $_POST['serving-size-label-hide'];
-        $calories_label                    = $_POST['calories-label'];
-        $calories_label_hide               = $_POST['calories-label-hide'];
-        $fat_label                         = $_POST['fat-label'];
-        $fat_label_hide                    = $_POST['fat-label-hide'];
         $rating_label                      = $_POST['rating-label'];
         $rating_label_hide                 = $_POST['rating-label-hide'];
         $image_width                       = $_POST['image-width'];
@@ -411,7 +403,9 @@ function mpprecipe_settings() {
     $rating_label_hide       = (strcmp($rating_label_hide, 'Hide') == 0 ? 'checked="checked"' : '');
     $notes_label_hide        = (strcmp($notes_label_hide, 'Hide') == 0 ? 'checked="checked"' : '');
     $other_options           = '';
-    $other_options_array     = array('Rating', 'Prep Time', 'Cook Time', 'Total Time', 'Yield', 'Serving Size', 'Calories', 'Fat', 'Notes');
+    $other_options_array     = array(
+        'Rating', 'Prep Time', 'Cook Time', 'Total Time', 'Yield', 'Serving Size', 
+        'Notes');
 
     foreach ($other_options_array as $option) {
         $name = strtolower(str_replace(' ', '-', $option));
@@ -688,8 +682,6 @@ function mpprecipe_iframe_content($post_info = null, $get_info = null) {
 
             $yield = $recipe->yield;
             $serving_size = $recipe->serving_size;
-            $calories = $recipe->calories;
-            $fat = $recipe->fat;
             $ingredients = $recipe->ingredients;
             $instructions = $recipe->instructions;
         } else {
@@ -729,8 +721,6 @@ function mpprecipe_iframe_content($post_info = null, $get_info = null) {
             $total_time_years = $post_info["total_time_years"];
             $yield = $post_info["yield"];
             $serving_size = $post_info["serving_size"];
-            $calories = $post_info["calories"];
-            $fat = $post_info["fat"];
             $ingredients = $post_info["ingredients"];
             $instructions = $post_info["instructions"];
             if ($recipe_title != null && $recipe_title != '' && $ingredients != null && $ingredients != '') {
@@ -749,8 +739,6 @@ function mpprecipe_iframe_content($post_info = null, $get_info = null) {
 	$total_time_minutes = esc_attr($total_time_minutes);
 	$yield              = esc_attr($yield);
 	$serving_size       = esc_attr($serving_size);
-	$calories           = esc_attr($calories);
-	$fat                = esc_attr($fat);
 	$ingredients        = esc_textarea($ingredients);
 	$instructions       = esc_textarea($instructions);
 	$summary            = esc_textarea($summary);
@@ -859,8 +847,6 @@ HTML;
                 $total_time_input_container
                 <p><label>Yield</label> <input type='text' name='yield' value='$yield' /></p>
                 <p><label>Serving Size</label> <input type='text' name='serving_size' value='$serving_size' /></p>
-                <p><label>Calories</label> <input type='text' name='calories' value='$calories' /></p>
-                <p><label>Fat</label> <input type='text' name='fat' value='$fat' /></p>
                 <p class='cls'><label>Notes</label> <textarea name='notes'>$notes</textarea></label></p>
             </div>
             <input type='submit' value='$submit' name='add-recipe-button' />
@@ -949,7 +935,9 @@ function mpprecipe_insert_db($post_info) {
     $recipe      = array ();
     $recipe_keys = array (
         "recipe_title" , "recipe_image", "summary", "rating", "yield", 
-        "serving_size", "calories", "fat", "ingredients", "instructions", 
+        "serving_size", 
+        "calories", "fat",
+        "ingredients", "instructions", 
         "notes"
     );
     foreach( $recipe_keys as $k )
@@ -1330,7 +1318,8 @@ function mpprecipe_format_recipe($recipe) {
         $output .= '<span itemprop="recipeYield">' . $recipe->yield . '</span></p>';
     }
 
-    if ($recipe->serving_size != null || $recipe->calories != null || $recipe->fat != null) {
+    if ($recipe->serving_size != null ) 
+    {
         $output .= '<div id="mpprecipe-nutrition" itemprop="nutrition" itemscope itemtype="http://schema.org/NutritionInformation">';
         if ($recipe->serving_size != null) {
             $output .= '<p id="mpprecipe-serving-size">';
@@ -1338,20 +1327,6 @@ function mpprecipe_format_recipe($recipe) {
                 $output .= get_option('mpprecipe_serving_size_label') . ' ';
             }
             $output .= '<span itemprop="servingSize">' . $recipe->serving_size . '</span></p>';
-        }
-        if ($recipe->calories != null) {
-            $output .= '<p id="mpprecipe-calories">';
-            if (strcmp(get_option('mpprecipe_calories_label_hide'), 'Hide') != 0) {
-                $output .= get_option('mpprecipe_calories_label') . ' ';
-            }
-            $output .= '<span itemprop="calories">' . $recipe->calories . '</span></p>';
-        }
-        if ($recipe->fat != null) {
-            $output .= '<p id="mpprecipe-fat">';
-            if (strcmp(get_option('mpprecipe_fat_label_hide'), 'Hide') != 0) {
-                $output .= get_option('mpprecipe_fat_label') . ' ';
-            }
-            $output .= '<span itemprop="fatContent">' . $recipe->fat . '</span></p>';
         }
         $output .= '</div>';
     }
