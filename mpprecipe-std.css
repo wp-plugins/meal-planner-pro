@@ -191,3 +191,55 @@ footer, #mpprecipe-container header, #mpprecipe-container hgroup, #mpprecipe-con
 	pointer-events: none;
 	cursor: default;
 }
+
+/* Quinn Revisions */
+#mpp-recipe-link-10 {
+width:20px !important;
+}
+#mpprecipe-instructions-list {
+margin-left: 0;
+padding-left: 0;
+counter-reset: item;
+}
+#mpprecipe-instructions-list li {
+display: block;
+margin-bottom: 1.5em;
+margin-left: 2em;
+}
+#mpprecipe-instructions-list li:before {
+display: inline-block;
+content: counter(item) ".";
+counter-increment: item;
+width: 2em;
+margin-left: -2em;
+font-weight:800;
+font-size:20px;
+position:relative;
+top:3px;
+}
+.zlmeta p {text-transform:uppercase;text-align:center;}
+.zlmeta span {text-transform:initial;display:block;}
+.zlmeta .width-50 {
+width:100% !important;
+}
+.zlmeta .width-50 {
+border-bottom: 1px dashed #999 !important;
+}
+.zlmeta .width-50:first-child p {
+width:33.3% !important;
+float:left;
+display:block;
+border-right:1px dashed #999 !important;
+}
+.zlmeta .width-50:first-child p:last-child {
+border-right:0px dashed #999 !important;
+}
+#mpprecipe-container .img-desc-wrap {
+background:none !important;
+}
+#mpprecipe-container .b-b {
+border-bottom: 0px dashed #999 !important;
+}
+#mpprecipe-container .b-b:first-child {
+border-bottom: 1px dashed #999 !important;
+}
