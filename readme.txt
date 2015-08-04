@@ -10,7 +10,7 @@ Donate link: http://sushiday.com/recipe-seo-plugin/
 Tags: google rich snippets, hrecipe, print recipe, recipe, recipe card, recipe seo, schema.org, seo, recipes, recipe box, shopping list, grocery list, meal planner, meal planning, nutrition, save recipe, groceries
 Requires at least: 3.1
 Tested up to: 4.2
-Stable tag: 3.8
+Stable tag: 3.8.1
 
 Enable your readers to take action on your recipes. Save Recipes, Create Shopping Lists, Add to Meal Planning Calendar, View Nutrition Info and more.
 
