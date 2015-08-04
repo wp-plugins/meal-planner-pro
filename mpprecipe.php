@@ -407,6 +407,19 @@ function mpprecipe_settings() {
         'Rating', 'Prep Time', 'Cook Time', 'Total Time', 'Yield', 'Serving Size', 
         'Notes');
 
+    $stylesheets_options_array = array(
+        'Default' => 'mpprecipe-std',
+        'None'    => '',
+        'Test1' => 'test1',
+        'Test2' => 'test2',
+        'Test3' => 'test3',
+        'Test4' => 'test4',
+    );
+
+    foreach ($stylesheets_options_array as $k => $v ) 
+        $stylesheets_options .= "<option value='$v'> $k </option>";
+
+
     foreach ($other_options_array as $option) {
         $name = strtolower(str_replace(' ', '-', $option));
         $value = strtolower(str_replace(' ', '_', $option)) . '_label';
@@ -429,7 +442,11 @@ function mpprecipe_settings() {
             <table class="form-table">
                 <tr valign="top">
                     <th scope="row">Stylesheet</th>
-                    <td><label><input type="checkbox" name="stylesheet" value="mpprecipe-std" ' . $stylesheet . ' /> Use legacy MealPlannerPro recipe style (included)</label></td>
+                    <td>
+                    <label>
+						<select name="stylesheet"> ' . $stylesheets_options  . ' </select>
+                    </label>
+                    </td>
                 </tr>
                 <tr valign="top">
                     <th scope="row">Recipe Title</th>

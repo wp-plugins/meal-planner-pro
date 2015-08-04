@@ -22,6 +22,10 @@ Recipe Publisher Service and WordPress Recipe Plugin
 
 Now your readers can take action on your recipes. From saving recipes to a full-featured recipe box, creating grocery lists, or adding them to their meal planning calendar; Meal Planner Pro brings your recipes right to your readers’ tables!
 
+[youtube https://www.youtube.com/watch?v=2rN-CTZqxJc]
+
+Note: Shay Bocks’ recipe card designs will be live August 11.
+
 Our easy to use plugin will, of course, make your recipes SEO-friendly and more likely to appear in [Google's Recipe View](http://googleblog.blogspot.com/2011/02/slice-and-dice-your-recipe-search.html) search. (All recipe plugins do this) No need to hand-code your recipes into a sophisticated recipe structure when the Meal Planner Pro Recipe Plugin will do all the heavy lifting for you. All while driving more traffic to your recipe website.
 
 If you’re familiar with the open-source [RecipeSEO](http://recipeseo.com/) plugin built by Allison Day or the now unsupported Ziplist plugin, you’ll quickly note that the Meal Planner Pro Recipe Plugin is an extension of these. It is super easy to install and your audience will be taking action on your recipes in no time.
