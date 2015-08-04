@@ -410,10 +410,6 @@ function mpprecipe_settings() {
     $stylesheets_options_array = array(
         'Default' => 'mpprecipe-std',
         'None'    => '',
-        'Test1' => 'test1',
-        'Test2' => 'test2',
-        'Test3' => 'test3',
-        'Test4' => 'test4',
     );
 
     foreach ($stylesheets_options_array as $k => $v ) 
