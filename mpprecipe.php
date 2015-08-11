@@ -4,7 +4,7 @@ Plugin Name: MealPlannerPro Recipe Plugin
 Plugin URI: http://www.mealplannerpro.com/recipe_plugin
 Plugin GitHub: https://github.com/Ziplist/recipe_plugin
 Description: A plugin that adds all the necessary microdata to your recipes, so they will show up in Google's Recipe Search
-Version: 3.8.1
+Version: 3.9
 Author: MealPlannerPro.com
 Author URI: http://www.mealplannerpro.com/
 License: GPLv3 or later
@@ -40,7 +40,7 @@ if (!defined('MPPRECIPE_VERSION_KEY'))
     define('MPPRECIPE_VERSION_KEY', 'mpprecipe_version');
 
 if (!defined('MPPRECIPE_VERSION_NUM'))
-    define('MPPRECIPE_VERSION_NUM', '3.8.1');
+    define('MPPRECIPE_VERSION_NUM', '3.9');
 
 if (!defined('MPPRECIPE_PLUGIN_DIRECTORY'))
 		define('MPPRECIPE_PLUGIN_DIRECTORY', plugins_url() . '/' . dirname(plugin_basename(__FILE__)) . '/');
@@ -96,19 +96,18 @@ add_option('mpprecipe_instruction_label_hide', '');
 add_option('mpprecipe_instruction_list_type', 'ol');
 add_option('mpprecipe_notes_label', 'Notes');
 add_option('mpprecipe_notes_label_hide', '');
-add_option('mpprecipe_prep_time_label', 'Prep Time:');
+add_option('mpprecipe_prep_time_label', 'Prep Time');
 add_option('mpprecipe_prep_time_label_hide', '');
-add_option('mpprecipe_cook_time_label', 'Cook Time:');
+add_option('mpprecipe_cook_time_label', 'Cook Time');
 add_option('mpprecipe_cook_time_label_hide', '');
-add_option('mpprecipe_total_time_label', 'Total Time:');
+add_option('mpprecipe_total_time_label', 'Total Time');
 add_option('mpprecipe_total_time_label_hide', '');
-add_option('mpprecipe_yield_label', 'Yield:');
+add_option('mpprecipe_yield_label', 'Serves');
 add_option('mpprecipe_yield_label_hide', '');
 add_option('mpprecipe_serving_size_label', 'Serving Size:');
 add_option('mpprecipe_serving_size_label_hide', '');
 add_option('mpprecipe_rating_label', 'Rating:');
 add_option('mpprecipe_rating_label_hide', '');
-add_option('mpprecipe_image_width', '');
 add_option('mpprecipe_outer_border_style', '');
 add_option('mpprecipe_custom_save_image', '');
 add_option('mpprecipe_custom_print_image', '');
@@ -155,7 +154,7 @@ if (strpos($_SERVER['REQUEST_URI'], 'media-upload.php') && strpos($_SERVER['REQU
 
 global $mpprecipe_db_version;
 // This must be changed when the DB structure is modified
-$mpprecipe_db_version = "3.8.1";	
+$mpprecipe_db_version = "3.9";	
 
 // Creates MPPRecipe tables in the db if they don't exist already.
 // Don't do any data initialization in this routine as it is called on both install as well as
@@ -301,7 +300,6 @@ function mpprecipe_settings() {
         update_option('mpprecipe_fat_label_hide', $fat_label_hide);
         update_option('mpprecipe_rating_label', $rating_label);
         update_option('mpprecipe_rating_label_hide', $rating_label_hide);
-        update_option('mpprecipe_image_width', $image_width);
         update_option('mpprecipe_outer_border_style', $outer_border_style);
         update_option('mpprecipe_custom_save_image', $custom_save_image);
         update_option('mpprecipe_custom_print_image', $custom_print_image);
@@ -340,7 +338,6 @@ function mpprecipe_settings() {
         $fat_label_hide                    = get_option('mpprecipe_fat_label_hide');
         $rating_label                      = get_option('mpprecipe_rating_label');
         $rating_label_hide                 = get_option('mpprecipe_rating_label_hide');
-        $image_width                       = get_option('mpprecipe_image_width');
         $outer_border_style                = get_option('mpprecipe_outer_border_style');
         $custom_save_image                 = get_option('mpprecipe_custom_save_image');
         $custom_print_image                = get_option('mpprecipe_custom_print_image');
@@ -1106,8 +1103,8 @@ function mpprecipe_format_duration($duration)
 {
     $date_abbr = array(
         'y' => 'year', 'm' => 'month', 
-        'd' => 'day', 'h' => 'hour', 
-        'i' => 'minute', 's' => 'second'
+        'd' => 'day', 'h' => 'hr', 
+        'i' => '', 's' => 'second'
     );
 	$result = '';
 
@@ -1124,7 +1121,7 @@ function mpprecipe_format_duration($duration)
 					$result .= $duration->$abbr . ' ' . $name;
 
 					if ($duration->$abbr > 1) 
-						$result .= 's';
+						$result .= '';
 
 					$result .= ', ';
 				}
@@ -1166,6 +1163,10 @@ function mpprecipe_process_head() {
 	// Always add the print script
     $header_html='<script type="text/javascript" async="" src="' . MPPRECIPE_PLUGIN_DIRECTORY . 'mpprecipe_print.js"></script>
 ';
+
+// adding google font
+$header_html .= '<link href="http://fonts.googleapis.com/css?family=Lato:400,700,300italic,300,100" rel="stylesheet" type="text/css">';
+
 
 	// Recipe styling
 	$css = get_option('mpprecipe_stylesheet');
@@ -1237,26 +1238,89 @@ function mpprecipe_format_recipe($recipe) {
     <div id="mpprecipe-container-' . $recipe->recipe_id . '" class="mpprecipe-container-border" ' . $style_tag . '>
     <div itemscope itemtype="http://schema.org/Recipe" id="mpprecipe-container" class="serif mpprecipe">
       <div id="mpprecipe-innerdiv">
-        <div class="item b-b">';
+        <div class="item mpp-top">';
 
-    // Add Print and Save Button
-    $output .= mpp_buttons( $recipe->recipe_id );
 
-    // add the MealPlannerPro recipe button
-    if (strcmp(get_option('mealplannerpro_recipe_button_hide'), 'Hide') != 0) {
-		$output .= '<div id="mpp-recipe-link-' . $recipe->recipe_id . '" class="mpp-recipe-link fl-r mpp-rmvd"></div>';
+
+    //!! Adjust to full width if no image
+    
+    if ($recipe->recipe_image == "" ) {
+    
+        
+        $output .= "<style>
+        	.mpp-topright {
+				width: 100% !important;
+				border-left: solid #cccccc 1px !important;
+			} 
+			.mpp-topleft {
+				display:none !important;
+			}
+        </style>
+        ";
+
+    
+    }
+    
+    //!! create image container
+    
+    if ($recipe->recipe_image != null )
+    {
+        $class  = 'mpp-topleft';
+        $style  = "background:url($recipe->recipe_image);background-size:cover;";
+
+        if (strcmp(get_option('mpprecipe_image_hide'), 'Hide') == 0)
+            $class_tag .= ' hide-card';
+
+        if (strcmp(get_option('mpprecipe_image_hide_print'), 'Hide') == 0)
+            $class .= ' hide-print';
+
+        $output .= "<div class='$class' style='$style' ></div>";
+
+        // Marked up and hidden image for Schema/Microformat compliance.
+        $output .= "<img style='display:none' class='photo' itemprop='image' src='$recipe->recipe_image' title='$recipe->recipe_title' alt='$recipe->recipe_title' />";
 	}
 
+    // Open mpp-topright panel if image
+	if ($recipe->recipe_image != null || $recipe->summary != null)
+        $output .= '<div class="mpp-topright">';
+	
+	
+	 //!! yield and nutrition
+    if ($recipe->yield != null) {
+        $output .= '<p id="mpprecipe-yield">';
+        if (strcmp(get_option('mpprecipe_yield_label_hide'), 'Hide') != 0) {
+            $output .= get_option('mpprecipe_yield_label') . ' ';
+        }
+        $output .= '<span itemprop="recipeYield">' . $recipe->yield . '</span></p>';
+    }
+
+    if ($recipe->serving_size != null ) 
+    {
+        $output .= '<div id="mpprecipe-nutrition" itemprop="nutrition" itemscope itemtype="http://schema.org/NutritionInformation">';
+        if ($recipe->serving_size != null) {
+            $output .= '<p id="mpprecipe-serving-size">';
+            if (strcmp(get_option('mpprecipe_serving_size_label_hide'), 'Hide') != 0) {
+                $output .= get_option('mpprecipe_serving_size_label') . ' ';
+            }
+            $output .= '<span itemprop="servingSize">' . $recipe->serving_size . '</span></p>';
+        }
+        $output .= '</div>';
+    }
+    
 	// add the title and close the item class
 	$hide_tag = '';
 	if (strcmp(get_option('recipe_title_hide'), 'Hide') == 0)
         $hide_tag = ' texthide';
-	$output .= '<div id="mpprecipe-title" itemprop="name" class="b-b h-1 strong' . $hide_tag . '" >' . $recipe->recipe_title . '</div>
-      </div>';
-
+	$output .= '<div id="mpprecipe-title" itemprop="name" class="h-1' . $hide_tag . '" >' . $recipe->recipe_title . '</div>';
+	
+		if ($recipe->summary != null) {
+			$output .= '<div id="mpprecipe-summary" itemprop="description">';
+			$output .= mpprecipe_break( '<p class="summary">', mpprecipe_richify_item($recipe->summary, 'summary'), '</p>' );
+			$output .= '</div>';
+		}
+		
 	// open the zlmeta and fl-l container divs
-	$output .= '<div class="zlmeta zlclear">
-      <div class="fl-l width-50">';
+	$output .= '<div class="fl-l">';
 
     if ($recipe->rating != 0) {
         $output .= '<p id="mpprecipe-rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">';
@@ -1272,19 +1336,23 @@ function mpprecipe_format_recipe($recipe) {
     	$prep_time = mpprecipe_format_duration($recipe->prep_time);
 
         $output .= '<p id="mpprecipe-prep-time">';
+        $output .= '<span itemprop="prepTime" content="' . $recipe->prep_time . '">' . $prep_time . '</span>';
+
         if (strcmp(get_option('mpprecipe_prep_time_label_hide'), 'Hide') != 0) {
             $output .= get_option('mpprecipe_prep_time_label') . ' ';
         }
-        $output .= '<span itemprop="prepTime" content="' . $recipe->prep_time . '">' . $prep_time . '</span></p>';
+        $output .= '</p>';
     }
     if ($recipe->cook_time != null) {
         $cook_time = mpprecipe_format_duration($recipe->cook_time);
 
         $output .= '<p id="mpprecipe-cook-time">';
+        $output .= '<span itemprop="cookTime" content="' . $recipe->cook_time . '">' . $cook_time . '</span>';
+        
         if (strcmp(get_option('mpprecipe_cook_time_label_hide'), 'Hide') != 0) {
             $output .= get_option('mpprecipe_cook_time_label') . ' ';
         }
-        $output .= '<span itemprop="cookTime" content="' . $recipe->cook_time . '">' . $cook_time . '</span></p>';
+        $output .= '</p>';
     }
 
 
@@ -1312,69 +1380,32 @@ function mpprecipe_format_recipe($recipe) {
     {
         $total_time = mpprecipe_format_duration($total_time_content);
         $output .= '<p id="mpprecipe-total-time">';
+        $output .= '<span itemprop="totalTime" content="' . $total_time_content . '">' . $total_time . '</span>';
+
         if (strcmp(get_option('mpprecipe_total_time_label_hide'), 'Hide') != 0) 
             $output .= get_option('mpprecipe_total_time_label') . ' ';
 
-        $output .= '<span itemprop="totalTime" content="' . $total_time_content . '">' . $total_time . '</span></p>';
+        $output .= '</p>';
     }
 
-    //!! close the first container div and open the second
-    $output .= '</div>
-      <div class="fl-l width-50">';
+   // Add Print and Save Button
+    $output .= mpp_buttons( $recipe->recipe_id );
 
-    //!! yield and nutrition
-    if ($recipe->yield != null) {
-        $output .= '<p id="mpprecipe-yield">';
-        if (strcmp(get_option('mpprecipe_yield_label_hide'), 'Hide') != 0) {
-            $output .= get_option('mpprecipe_yield_label') . ' ';
-        }
-        $output .= '<span itemprop="recipeYield">' . $recipe->yield . '</span></p>';
-    }
+    // add the MealPlannerPro recipe button
+    if (strcmp(get_option('mealplannerpro_recipe_button_hide'), 'Hide') != 0) {
+		$output .= '<div id="mpp-recipe-link-' . $recipe->recipe_id . '" class="mpp-recipe-link fl-r mpp-rmvd"></div>';
 
-    if ($recipe->serving_size != null ) 
-    {
-        $output .= '<div id="mpprecipe-nutrition" itemprop="nutrition" itemscope itemtype="http://schema.org/NutritionInformation">';
-        if ($recipe->serving_size != null) {
-            $output .= '<p id="mpprecipe-serving-size">';
-            if (strcmp(get_option('mpprecipe_serving_size_label_hide'), 'Hide') != 0) {
-                $output .= get_option('mpprecipe_serving_size_label') . ' ';
-            }
-            $output .= '<span itemprop="servingSize">' . $recipe->serving_size . '</span></p>';
-        }
-        $output .= '</div>';
-    }
-
-    //!! close the second container
-    $output .= '</div>
-      <div class="zlclear">
-      </div>
-    </div>';
-
-    //!! create image and summary container
-    if ($recipe->recipe_image != null || $recipe->summary != null) {
-        $output .= '<div class="img-desc-wrap">';
-		if ($recipe->recipe_image != null) {
-			$style_tag = '';
-			$class_tag = '';
-			$image_width = get_option('mpprecipe_image_width');
-			if ($image_width != null) {
-				$style_tag = 'style="width: ' . $image_width . 'px;"';
-			}
-			if (strcmp(get_option('mpprecipe_image_hide'), 'Hide') == 0)
-				$class_tag .= ' hide-card';
-			if (strcmp(get_option('mpprecipe_image_hide_print'), 'Hide') == 0)
-				$class_tag .= ' hide-print';
-			$output .= '<p class="t-a-c' . $class_tag . '">
-			  <img class="photo" itemprop="image" src="' . $recipe->recipe_image . '" title="' . $recipe->recipe_title . '" alt="' . $recipe->recipe_title . '" ' . $style_tag . ' />
-			</p>';
-		}
-		if ($recipe->summary != null) {
-			$output .= '<div id="mpprecipe-summary" itemprop="description">';
-			$output .= mpprecipe_break( '<p class="summary italic">', mpprecipe_richify_item($recipe->summary, 'summary'), '</p>' );
-			$output .= '</div>';
-		}
+	}
+   	 
+   	//!! close mpp-topright if there is an image
+	if ($recipe->recipe_image != null || $recipe->summary != null) {
 		$output .= '</div>';
 	}
+			$output .= '<div class="zlclear"></div>';
+
+    //!! close the containers
+    $output .= '</div><div class="zlclear"></div></div>';
+	
 
     $ingredient_type= '';
     $ingredient_tag = '';
@@ -1490,18 +1521,18 @@ function mpp_buttons( $recipe_id )
     return "
         <div id='mpp-buttons'>
 
-
+  			
             <div
                class = 'save-button mpp-button'
                title = 'Save Recipe to Mealplannerpro.com'
                alt   = 'Save Recipe to Mealplannerpro.com'
                onclick=\"" . mpp_save_recipe_js() . "\"
-            >
+            ><img src='" . $dir . "plus.png' style='margin-top:-1px;' /> Save Recipe
             </div>
-            <div 
+          <div 
                 class   = '$button_type mpp-button' 
                 title   = 'Print this recipe'
-                onclick = 'zlrPrint( \"mpprecipe-container-$recipe_id\", \"$dir\" ); return false'> 
+                onclick = 'zlrPrint( \"mpprecipe-container-$recipe_id\", \"$dir\" ); return false'>Print Recipe
                 $button_image
             </div>
 
@@ -1510,30 +1541,7 @@ function mpp_buttons( $recipe_id )
         <style> 
             div#mpp-buttons { float:right; margin-top: 10px;  }
             .mpp-button  { display:inline-block; }
-            .save-button
-            {
-                width:  68px;
-                height: 34px;
-                background: url('${dir}save.png');
-                cursor: pointer;
-            }
 
-            .save-button:hover
-            {
-                background: url('${dir}savehover.png');
-            }
-
-            .butn-link
-            {
-                width:  68px;
-                height: 34px;
-                background: url('${dir}print.png');
-                cursor: pointer;
-            }
-            .butn-link:hover
-            {
-                background: url('${dir}printhover.png');
-            }
 
         </style>
         ";
