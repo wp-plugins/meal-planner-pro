@@ -59,6 +59,9 @@ footer, #mpprecipe-container header, #mpprecipe-container hgroup, #mpprecipe-con
 /* END RESETS */
 
 /* BASE */
+
+
+
 #mpprecipe-container p {
   line-height: 1.2em;
   margin: 1em 0;
@@ -196,16 +199,12 @@ footer, #mpprecipe-container header, #mpprecipe-container hgroup, #mpprecipe-con
 #mpp-recipe-link-10 {
 width:20px !important;
 }
-#mpprecipe-instructions-list {
+/*#mpprecipe-instructions-list {
 margin-left: 0;
 padding-left: 0;
 counter-reset: item;
 }
-#mpprecipe-instructions-list li {
-display: block;
-margin-bottom: 1.5em;
-margin-left: 2em;
-}
+
 #mpprecipe-instructions-list li:before {
 display: inline-block;
 content: counter(item) ".";
@@ -216,30 +215,290 @@ font-weight:800;
 font-size:20px;
 position:relative;
 top:3px;
+}*/
+#mpprecipe-instructions-list li {
+margin-bottom: 1em;
+margin-left: 0.5em;
+}
+#mpprecipe-container ol {
+	padding:0;
 }
 .zlmeta p {text-transform:uppercase;text-align:center;}
 .zlmeta span {text-transform:initial;display:block;}
 .zlmeta .width-50 {
 width:100% !important;
 }
-.zlmeta .width-50 {
-border-bottom: 1px dashed #999 !important;
-}
-.zlmeta .width-50:first-child p {
-width:33.3% !important;
-float:left;
-display:block;
-border-right:1px dashed #999 !important;
-}
-.zlmeta .width-50:first-child p:last-child {
-border-right:0px dashed #999 !important;
-}
+
+
 #mpprecipe-container .img-desc-wrap {
 background:none !important;
 }
-#mpprecipe-container .b-b {
-border-bottom: 0px dashed #999 !important;
+
+/*
+
+DESIGN 1
+
+*/
+
+.mpprecipe {
+	color:#444;
+	font-family: 'Lato', sans-serif;
+	font-weight:300 !important;
+	font-size:15px !important;
+	word-wrap: initial;
 }
-#mpprecipe-container .b-b:first-child {
-border-bottom: 1px dashed #999 !important;
+#mpprecipe-serving-size {
+    font-family:'Lato' !important;
+}
+.mpprecipe div, .mpprecipe p { 
+	box-sizing: border-box !important;
+}
+content-box
+#mpprecipe-yield {
+	font-size:18px !important;
+	color:#888888;
+	text-transform:uppercase;
+	letter-spacing:4px;
+	font-weight:300 !important;
+}
+#mpprecipe-title {
+	font-size:38px !important;
+	letter-spacing:1px;
+	color:#444444;
+	font-weight:300 !important;	
+	text-transform:uppercase;
+}
+#mpprecipe-summary {
+	font-size:22px !important;
+	color:#444444;
+	font-style:none !important;
+	font-weight:300 !important;	
+	
+}
+#mpprecipe-prep-time, #mpprecipe-cook-time, #mpprecipe-total-time {
+	color:#bbbbbb;
+	font-weight:400 !important;	
+	font-size:19px !important;
+	
+}
+#mpprecipe-prep-time span, #mpprecipe-cook-time span, #mpprecipe-total-time span {
+	display:block;
+	font-weight:300;
+	color:#444444;
+	font-size:30px !important;
+	padding-bottom:8px;
+}
+.mpprecipe .h-4 {
+	color:#5bd982;
+	font-size:22px !important;
+	font-weight:400 !important;	
+	
+}
+.butn-link
+{
+	width:  140px;
+	height: 40px;
+	background-color:#fff;
+	cursor: pointer;
+	color:#bbbbbb;	
+	border-radius:3px;
+	text-align:center;
+	line-height:40px !important;
+	vertical-align:middle !important;
+	font-size:14px !important;
+	font-weight:700 !important;	
+	margin-top:3px !important;
+	
+}
+.save-button img {
+	line-height:40px !important;
+	vertical-align:middle !important;
+}
+.butn-link:hover
+{
+	background-color:#f4f4f4;
+}
+
+.save-button
+{
+	width:  140px;
+	height: 40px;
+	background-color:#5bd982;
+	cursor: pointer;
+	color:#fff;	
+	border-radius:3px;
+	text-align:center;
+	line-height:40px !important;
+	vertical-align:middle !important;
+	font-size:14px !important;
+	font-weight:700 !important;
+	margin-top:3px !important;
+
+}
+.save-button:hover
+{
+	background-color:#58ca7b;
+}
+            
+
+.mpp-top {
+	overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.mpp-topleft {
+	width:40%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.mpp-topright {
+	float:right;
+	width:60%;
+	border:solid #cccccc 1px !important;
+	border-left:solid #cccccc 0px !important;
+	padding:30px !important;
+}
+
+#mpprecipe-container ul {
+    margin: 1em;
+    padding: 0 0 0 0em;
+}
+#mpprecipe-cook-time {
+	border-left:solid #cccccc 1px !important;
+	border-right:solid #cccccc 1px !important;
+
+}
+#mpprecipe-prep-time, #mpprecipe-cook-time, #mpprecipe-total-time {
+	float:left;
+	width:33%;
+	padding:10px !important;
+}
+@media screen and (max-width: 1300px) {
+	*/
+
+		.mpprecipe {
+			font-size:15px !important;
+
+		}
+		#mpprecipe-yield {
+			font-size:16px !important;
+		}
+		#mpprecipe-title {
+			font-size:34px !important;
+		}
+		#mpprecipe-summary {
+			font-size:20px !important;
+
+	
+		}
+	
+		#mpprecipe-prep-time span, #mpprecipe-cook-time span, #mpprecipe-total-time span {
+			font-size:27px !important;
+		}
+		.mpprecipe .h-4 {
+			font-size:20px !important;
+	
+		}
+		.butn-link
+		{
+
+			font-size:14px !important;
+	
+		}
+	
+
+		.save-button
+		{
+
+			font-size:14px !important;
+
+		}
+	
+}
+@media screen and (max-width: 1050px) {
+	*/
+
+		.mpprecipe {
+			font-size:14px !important;
+
+		}
+		#mpprecipe-yield {
+			font-size:14px !important;
+		}
+		#mpprecipe-title {
+			font-size:32px !important;
+		}
+		#mpprecipe-summary {
+			font-size:18px !important;
+
+	
+		}
+		#mpprecipe-prep-time, #mpprecipe-cook-time, #mpprecipe-total-time {
+			font-size:15px !important;
+	
+		}
+		#mpprecipe-prep-time span, #mpprecipe-cook-time span, #mpprecipe-total-time span {
+			font-size:25px !important;
+		}
+		.mpprecipe .h-4 {
+			font-size:18px !important;
+	
+		}
+		.butn-link
+		{
+
+			font-size:13px !important;
+	
+		}
+	
+
+		.save-button
+		{
+
+			font-size:13px !important;
+
+		}
+	
+}
+@media screen and (max-width: 862px) {
+	.mpp-topright {
+		clear:both;
+		float: none;
+		width: 100%;
+		border: solid #cccccc 1px !important;
+	}
+	.mpp-topleft {
+		width: 100%;
+		height: 300px;
+		position: initial;
+	}
+}
+@media screen and (max-width: 480px) {
+
+	#mpprecipe-prep-time, #mpprecipe-cook-time, #mpprecipe-total-time {
+		width:100%;
+		margin: 0 !important;
+    	text-align: center !important;
+	}
+	#mpprecipe-cook-time {
+		border-left:solid #cccccc 0px !important;
+		border-right:solid #cccccc 0px !important;
+	}
+	#mpprecipe-summary {
+		padding-bottom:40px;
+	}
+	div#mpp-buttons {
+		margin-top: 10px !important;
+		clear: both !important;
+		float:none !important;
+		padding-top:40px !important;
+	}
+	.mpp-button {
+		display: block !important;
+		margin: 0 auto !important;
+		float: none !important;
+	}
 }

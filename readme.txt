@@ -10,7 +10,7 @@ Donate link: http://sushiday.com/recipe-seo-plugin/
 Tags: google rich snippets, hrecipe, print recipe, recipe, recipe card, recipe seo, schema.org, seo, recipes, recipe box, shopping list, grocery list, meal planner, meal planning, nutrition, save recipe, groceries
 Requires at least: 3.1
 Tested up to: 4.2
-Stable tag: 3.8.1
+Stable tag: 3.9
 
 Enable your readers to take action on your recipes. Save Recipes, Create Shopping Lists, Add to Meal Planning Calendar, View Nutrition Info and more.
 
@@ -23,8 +23,6 @@ Recipe Publisher Service and WordPress Recipe Plugin
 Now your readers can take action on your recipes. From saving recipes to a full-featured recipe box, creating grocery lists, or adding them to their meal planning calendar; Meal Planner Pro brings your recipes right to your readers’ tables!
 
 [youtube https://www.youtube.com/watch?v=2rN-CTZqxJc]
-
-Note: Shay Bocks’ recipe card designs will be live August 11.
 
 Our easy to use plugin will, of course, make your recipes SEO-friendly and more likely to appear in [Google's Recipe View](http://googleblog.blogspot.com/2011/02/slice-and-dice-your-recipe-search.html) search. (All recipe plugins do this) No need to hand-code your recipes into a sophisticated recipe structure when the Meal Planner Pro Recipe Plugin will do all the heavy lifting for you. All while driving more traffic to your recipe website.
 
