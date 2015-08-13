@@ -4,7 +4,7 @@ Plugin Name: MealPlannerPro Recipe Plugin
 Plugin URI: http://www.mealplannerpro.com/recipe_plugin
 Plugin GitHub: https://github.com/Ziplist/recipe_plugin
 Description: A plugin that adds all the necessary microdata to your recipes, so they will show up in Google's Recipe Search
-Version: 3.9
+Version: 3.9.1
 Author: MealPlannerPro.com
 Author URI: http://www.mealplannerpro.com/
 License: GPLv3 or later
@@ -40,7 +40,7 @@ if (!defined('MPPRECIPE_VERSION_KEY'))
     define('MPPRECIPE_VERSION_KEY', 'mpprecipe_version');
 
 if (!defined('MPPRECIPE_VERSION_NUM'))
-    define('MPPRECIPE_VERSION_NUM', '3.9');
+    define('MPPRECIPE_VERSION_NUM', '3.9.1');
 
 if (!defined('MPPRECIPE_PLUGIN_DIRECTORY'))
 		define('MPPRECIPE_PLUGIN_DIRECTORY', plugins_url() . '/' . dirname(plugin_basename(__FILE__)) . '/');
@@ -154,7 +154,7 @@ if (strpos($_SERVER['REQUEST_URI'], 'media-upload.php') && strpos($_SERVER['REQU
 
 global $mpprecipe_db_version;
 // This must be changed when the DB structure is modified
-$mpprecipe_db_version = "3.9";	
+$mpprecipe_db_version = "3.9.1";	
 
 // Creates MPPRecipe tables in the db if they don't exist already.
 // Don't do any data initialization in this routine as it is called on both install as well as
@@ -1255,6 +1255,14 @@ function mpprecipe_format_recipe($recipe) {
 			.mpp-topleft {
 				display:none !important;
 			}
+			.mpp-topright .fl-l {
+				float:none !important;
+			}
+			div#mpp-buttons {
+				float: none !important;
+				margin: 0 auto !important;
+				max-width: 284px !important;
+			}
         </style>
         ";
 
@@ -1269,7 +1277,7 @@ function mpprecipe_format_recipe($recipe) {
         $style  = "background:url($recipe->recipe_image);background-size:cover;";
 
         if (strcmp(get_option('mpprecipe_image_hide'), 'Hide') == 0)
-            $class_tag .= ' hide-card';
+            $class .= ' hide-card';
 
         if (strcmp(get_option('mpprecipe_image_hide_print'), 'Hide') == 0)
             $class .= ' hide-print';
